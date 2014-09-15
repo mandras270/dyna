@@ -79,4 +79,17 @@ public class GameTable {
 		}
 		return true;
 	}
+
+	public Ground[][] getGameTable() {
+		return gameTable;
+	}
+
+	public void move(int fromX, int fromY, int toX, int toY) {
+		
+		gameTable[toX][toY] = gameTable[fromX][fromY];
+		gameTable[fromX][fromY] = new Grass();
+		
+		
+	}
+
 }
