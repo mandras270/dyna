@@ -13,7 +13,7 @@ public class GameTable {
 
 	private static final int SIZE = 11;
 	private static final int PLAYER_NUMBER = 1;
-
+	private static final int numOfRedBrick = (int) (SIZE * SIZE * 0.20);
 	Ground[][] gameTable;
 	Random rnd;
 
@@ -26,15 +26,26 @@ public class GameTable {
 	private void init() {
 
 		gameTable = new Ground[SIZE][SIZE];
-
 		/* add grass */
+		setGrass();
+		/* add players */
+		setPlayers();
+		/* add non-breakable bricks */
+		setNonBreakableBricks();
+		/* add breakable brick */
+		setBreakableBricks();
+
+	}
+
+	public void setGrass() {
 		for (int i = 0; i < SIZE; ++i) {
 			for (int j = 0; j < SIZE; ++j) {
 				gameTable[i][j] = new Grass();
 			}
 		}
+	}
 
-		/* add players */
+	public void setPlayers() {
 		for (int i = 0; i < PLAYER_NUMBER; ++i) {
 			if (i == 0) {
 				gameTable[0][0] = new Player();
@@ -46,16 +57,18 @@ public class GameTable {
 				gameTable[SIZE - 1][SIZE - 1] = new Player();
 			}
 		}
+	}
 
-		/* add non-breakable bricks */
+	public void setNonBreakableBricks() {
 		for (int i = 1; i < SIZE; i += 2) {
 			for (int j = 1; j < SIZE; j += 2) {
 				gameTable[i][j] = new GrayBrick();
 			}
 		}
 
-		int numOfRedBrick = (int) (SIZE * SIZE * 0.20);
+	}
 
+	public void setBreakableBricks() {
 		for (int i = 0; i < numOfRedBrick; i++) {
 			int x;
 			int y;
@@ -65,7 +78,6 @@ public class GameTable {
 			} while (canPlaceBrick(x, y));
 			gameTable[x][y] = new RedBrick();
 		}
-
 	}
 
 	public boolean canPlaceBrick(int x, int y) {
@@ -84,17 +96,18 @@ public class GameTable {
 		return gameTable;
 	}
 
+	/* when a player move */
 	public void move(int fromX, int fromY, int toX, int toY) {
-		
+
 		gameTable[toX][toY] = gameTable[fromX][fromY];
 		gameTable[fromX][fromY] = new Grass();
-		
-		
+
 	}
-	
-	public void explode(int x, int y){
+
+	/* when a destroyable object explde */
+	public void explode(int x, int y) {
 		gameTable[x][y] = new Grass();
-	
+
 	}
 
 }
