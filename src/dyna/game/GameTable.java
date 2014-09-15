@@ -1,9 +1,13 @@
 package dyna.game;
 
+import java.util.Random;
+
+import dyna.fields.Brick;
 import dyna.fields.Grass;
 import dyna.fields.GrayBrick;
 import dyna.fields.Ground;
 import dyna.fields.Player;
+import dyna.fields.RedBrick;
 
 public class GameTable {
 
@@ -11,6 +15,13 @@ public class GameTable {
 	private static final int PLAYER_NUMBER = 1;
 
 	Ground[][] gameTable;
+	Random rnd;
+
+	public GameTable() {
+		rnd = new Random();
+		init();
+
+	}
 
 	private void init() {
 
@@ -43,6 +54,29 @@ public class GameTable {
 			}
 		}
 
+		int numOfRedBrick = (int) (SIZE * SIZE * 0.20);
+
+		for (int i = 0; i < numOfRedBrick; i++) {
+			int x;
+			int y;
+			do {
+				x = rnd.nextInt(SIZE);
+				y = rnd.nextInt(SIZE);
+			} while (canPlaceBrick(x, y));
+			gameTable[x][y] = new RedBrick();
+		}
+
 	}
 
+	public boolean canPlaceBrick(int x, int y) {
+		if (((x == 1 || x == SIZE - 2) && (y == 0 || y == SIZE - 1))
+				|| ((x == 0 || x == SIZE - 1) && (y == 0 || y == 1
+						|| y == SIZE - 1 || y == SIZE - 2))) {
+			return false;
+		}
+		if (gameTable[x][y] instanceof Brick) {
+			return false;
+		}
+		return true;
+	}
 }
