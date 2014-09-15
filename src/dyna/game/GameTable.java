@@ -91,5 +91,10 @@ public class GameTable {
 		
 		
 	}
+	
+	public void explode(int x, int y){
+		gameTable[x][y] = new Grass();
+	
+	}
 
 }
