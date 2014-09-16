@@ -37,7 +37,7 @@ public class GameTable {
 
 	}
 
-	public void setGrass() {
+	private void setGrass() {
 		for (int i = 0; i < SIZE; ++i) {
 			for (int j = 0; j < SIZE; ++j) {
 				gameTable[i][j] = new Grass();
@@ -45,7 +45,7 @@ public class GameTable {
 		}
 	}
 
-	public void setPlayers() {
+	private void setPlayers() {
 		for (int i = 0; i < PLAYER_NUMBER; ++i) {
 			if (i == 0) {
 				gameTable[0][0] = new Player();
@@ -59,7 +59,7 @@ public class GameTable {
 		}
 	}
 
-	public void setNonBreakableBricks() {
+	private void setNonBreakableBricks() {
 		for (int i = 1; i < SIZE; i += 2) {
 			for (int j = 1; j < SIZE; j += 2) {
 				gameTable[i][j] = new GrayBrick();
@@ -68,7 +68,7 @@ public class GameTable {
 
 	}
 
-	public void setBreakableBricks() {
+	private void setBreakableBricks() {
 		for (int i = 0; i < numOfRedBrick; i++) {
 			int x;
 			int y;
@@ -80,7 +80,7 @@ public class GameTable {
 		}
 	}
 
-	public boolean canPlaceBrick(int x, int y) {
+	private boolean canPlaceBrick(int x, int y) {
 		if (((x == 1 || x == SIZE - 2) && (y == 0 || y == SIZE - 1))
 				|| ((x == 0 || x == SIZE - 1) && (y == 0 || y == 1
 						|| y == SIZE - 1 || y == SIZE - 2))) {
@@ -104,7 +104,7 @@ public class GameTable {
 
 	}
 
-	/* when a destroyable object explde */
+	/* when a destroyable object explode */
 	public void explode(int x, int y) {
 		gameTable[x][y] = new Grass();
 

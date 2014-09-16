@@ -1,6 +1,8 @@
 package dyna.fields;
 
 public abstract class Ground {
-	int x;
-	int y;
+	protected int x;
+	protected int y;
+	
+	
 }
