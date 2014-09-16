@@ -48,13 +48,14 @@ public class GameTable {
 	private void setPlayers() {
 		for (int i = 0; i < PLAYER_NUMBER; ++i) {
 			if (i == 0) {
-				gameTable[0][0] = new Player();
+				gameTable[0][0] = new Player("Blue", 0, 0, 0);
 			} else if (i == 1) {
-				gameTable[SIZE - 1][0] = new Player();
+				gameTable[SIZE - 1][0] = new Player("Red", 0, SIZE - 1, 0);
 			} else if (i == 2) {
-				gameTable[0][SIZE - 1] = new Player();
+				gameTable[0][SIZE - 1] = new Player("Green", 0, 0, SIZE - 1);
 			} else if (i == 3) {
-				gameTable[SIZE - 1][SIZE - 1] = new Player();
+				gameTable[SIZE - 1][SIZE - 1] = new Player("Black", 0,
+						SIZE - 1, SIZE - 1);
 			}
 		}
 	}
