@@ -76,7 +76,7 @@ public class GameTable {
 			do {
 				x = rnd.nextInt(SIZE);
 				y = rnd.nextInt(SIZE);
-			} while (canPlaceBrick(x, y));
+			} while (!canPlaceBrick(x, y));
 			gameTable[x][y] = new RedBrick(x,y,this);
 		}
 	}
@@ -85,7 +85,7 @@ public class GameTable {
 		if (((x == 1 || x == SIZE - 2) && (y == 0 || y == SIZE - 1))
 				|| ((x == 0 || x == SIZE - 1) && (y == 0 || y == 1
 						|| y == SIZE - 1 || y == SIZE - 2))) {
-			return false;
+			return true;
 		}
 		if (gameTable[x][y] instanceof Brick) {
 			return false;
