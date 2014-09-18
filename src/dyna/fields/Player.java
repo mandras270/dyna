@@ -4,21 +4,37 @@ import dyna.game.GameTable;
 
 public class Player extends Ground {
 
+	private static final int MAX_BOMB = 3;
+
 	private String name;
 	private int score;
 	private boolean isAlive;
+	private int bombLeft;
+
 	public Player(String name, int score, int x, int y, GameTable gt) {
 		super(x, y, gt);
 		this.name = name;
 		this.score = score;
 		this.isAlive = true;
+		bombLeft = MAX_BOMB;
 
 	}
- 	
-	public void die(){
+
+	public void setBomb() {
+		if (bombLeft > 0) {
+			new Bomb(x, y, gt, this);
+			bombLeft++;
+		}
+	}
+
+	public void increaseBombNum() {
+		bombLeft++;
+	}
+
+	public void die() {
 		isAlive = false;
 	}
-	
+
 	public boolean isAlive() {
 		return isAlive;
 	}
