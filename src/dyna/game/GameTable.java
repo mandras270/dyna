@@ -23,17 +23,18 @@ public class GameTable {
 		init();
 
 	}
-	/* initialize and set the table*/ 
+
+	/* initialize and set the table */
 	private void init() {
 
 		gameTable = new Ground[SIZE][SIZE];
-		players = new Player[PLAYER_NUMBER];
-		
+		createPlayers();
+
 		newGame();
 
 	}
-	
-	/* create a new game */ 
+
+	/* create a new game */
 	public void newGame() {
 		setGrass();
 		/* add players */
@@ -43,21 +44,21 @@ public class GameTable {
 		/* add breakable brick */
 		setBreakableBricks();
 	}
-	
-	/* if more than one player alive the game is running*/ 
-	public boolean isGameRunning(){
+
+	/* if more than one player alive the game is running */
+	public boolean isGameRunning() {
 		int alivePlayers = 0;
-		for(int i = 0; i < PLAYER_NUMBER; i++){
-			if(players[i].isAlive()){
+		for (int i = 0; i < PLAYER_NUMBER; i++) {
+			if (players[i].isAlive()) {
 				alivePlayers++;
 			}
 		}
-		if(alivePlayers > 1){
+		if (alivePlayers > 1) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	private void setGrass() {
 		for (int i = 0; i < SIZE; ++i) {
 			for (int j = 0; j < SIZE; ++j) {
@@ -66,26 +67,27 @@ public class GameTable {
 		}
 	}
 
+	private void createPlayers() {
+		Player blue = new Player("Blue", 0, 0, 0, this);
+		Player red = new Player("Red", 0, SIZE - 1, 0, this);
+		Player green = new Player("Green", 0, 0, SIZE - 1, this);
+		Player black = new Player("Black", 0, SIZE - 1, SIZE - 1, this);
+		players = new Player[]{blue,red,green,black};
+	}
+
 	private void setPlayers() {
 		for (int i = 0; i < PLAYER_NUMBER; ++i) {
-			Player p = null;
 			if (i == 0) {
-				p = new Player("Blue", 0, 0, 0, this);
-				gameTable[0][0] = p;
-
+				gameTable[0][0] = players[i];
 			} else if (i == 1) {
-				p = new Player("Red", 0, SIZE - 1, 0, this);
-				gameTable[SIZE - 1][0] = p;
-
+				gameTable[SIZE - 1][0] = players[i];
 			} else if (i == 2) {
-				p = new Player("Green", 0, 0, SIZE - 1, this);
-				gameTable[0][SIZE - 1] = p;
+				gameTable[0][SIZE - 1] = players[i];
 
 			} else if (i == 3) {
-				p = new Player("Black", 0, SIZE - 1, SIZE - 1, this);
-				gameTable[SIZE - 1][SIZE - 1] = p;
+				gameTable[SIZE - 1][SIZE - 1] = players[i];
 			}
-			players[i] = p;
+			players[i].resurrect();
 		}
 	}
 
@@ -109,7 +111,7 @@ public class GameTable {
 			gameTable[x][y] = new RedBrick(x, y, this);
 		}
 	}
-	
+
 	private boolean canPlaceBrick(int x, int y) {
 		if (((x == 1 || x == SIZE - 2) && (y == 0 || y == SIZE - 1))
 				|| ((x == 0 || x == SIZE - 1) && (y == 0 || y == 1

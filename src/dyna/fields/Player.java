@@ -15,7 +15,7 @@ public class Player extends Ground {
 		super(x, y, gt);
 		this.name = name;
 		this.score = score;
-		this.isAlive = true;
+		this.isAlive = false;
 		bombLeft = MAX_BOMB;
 
 	}
@@ -35,6 +35,9 @@ public class Player extends Ground {
 		isAlive = false;
 	}
 
+	public void resurrect(){
+		isAlive = true;
+	}
 	public boolean isAlive() {
 		return isAlive;
 	}
