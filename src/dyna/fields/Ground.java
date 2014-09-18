@@ -14,4 +14,6 @@ public abstract class Ground {
 	
 	
 	public abstract boolean penetrable();
+	
+	public abstract boolean destroyable();
 }

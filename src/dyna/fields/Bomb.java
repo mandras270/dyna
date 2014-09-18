@@ -13,4 +13,9 @@ public class Bomb extends Ground {
 		return false;
 	}
 
+	@Override
+	public boolean destroyable() {
+		return true;
+	}
+
 }

@@ -13,4 +13,9 @@ public class Grass extends Ground {
 		return true;
 	}
 
+	@Override
+	public boolean destroyable() {
+		return false;
+	}
+
 }

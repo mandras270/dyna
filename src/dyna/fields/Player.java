@@ -6,12 +6,37 @@ public class Player extends Ground {
 
 	private String name;
 	private int score;
-
+	private boolean isAlive;
 	public Player(String name, int score, int x, int y, GameTable gt) {
 		super(x, y, gt);
 		this.name = name;
 		this.score = score;
+		this.isAlive = true;
 
+	}
+ 	
+	public void die(){
+		isAlive = false;
+	}
+	
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	public void moveDown() {
@@ -59,6 +84,11 @@ public class Player extends Ground {
 	@Override
 	public boolean penetrable() {
 		return false;
+	}
+
+	@Override
+	public boolean destroyable() {
+		return true;
 	}
 
 }
