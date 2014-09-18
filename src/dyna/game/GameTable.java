@@ -40,7 +40,7 @@ public class GameTable {
 	private void setGrass() {
 		for (int i = 0; i < SIZE; ++i) {
 			for (int j = 0; j < SIZE; ++j) {
-				gameTable[i][j] = new Grass(i,j,this);
+				gameTable[i][j] = new Grass(i, j, this);
 			}
 		}
 	}
@@ -48,14 +48,15 @@ public class GameTable {
 	private void setPlayers() {
 		for (int i = 0; i < PLAYER_NUMBER; ++i) {
 			if (i == 0) {
-				gameTable[0][0] = new Player("Blue", 0, 0, 0,this);
+				gameTable[0][0] = new Player("Blue", 0, 0, 0, this);
 			} else if (i == 1) {
-				gameTable[SIZE - 1][0] = new Player("Red", 0, SIZE - 1, 0,this);
+				gameTable[SIZE - 1][0] = new Player("Red", 0, SIZE - 1, 0, this);
 			} else if (i == 2) {
-				gameTable[0][SIZE - 1] = new Player("Green", 0, 0, SIZE - 1,this);
+				gameTable[0][SIZE - 1] = new Player("Green", 0, 0, SIZE - 1,
+						this);
 			} else if (i == 3) {
 				gameTable[SIZE - 1][SIZE - 1] = new Player("Black", 0,
-						SIZE - 1, SIZE - 1,this);
+						SIZE - 1, SIZE - 1, this);
 			}
 		}
 	}
@@ -63,7 +64,7 @@ public class GameTable {
 	private void setNonBreakableBricks() {
 		for (int i = 1; i < SIZE; i += 2) {
 			for (int j = 1; j < SIZE; j += 2) {
-				gameTable[i][j] = new GrayBrick(i,j,this);
+				gameTable[i][j] = new GrayBrick(i, j, this);
 			}
 		}
 
@@ -77,7 +78,7 @@ public class GameTable {
 				x = rnd.nextInt(SIZE);
 				y = rnd.nextInt(SIZE);
 			} while (!canPlaceBrick(x, y));
-			gameTable[x][y] = new RedBrick(x,y,this);
+			gameTable[x][y] = new RedBrick(x, y, this);
 		}
 	}
 
@@ -85,7 +86,7 @@ public class GameTable {
 		if (((x == 1 || x == SIZE - 2) && (y == 0 || y == SIZE - 1))
 				|| ((x == 0 || x == SIZE - 1) && (y == 0 || y == 1
 						|| y == SIZE - 1 || y == SIZE - 2))) {
-			return true;
+			return false;
 		}
 		if (gameTable[x][y] instanceof Brick) {
 			return false;
@@ -101,13 +102,13 @@ public class GameTable {
 	public void move(int fromX, int fromY, int toX, int toY) {
 
 		gameTable[toX][toY] = gameTable[fromX][fromY];
-		gameTable[fromX][fromY] = new Grass(fromX,fromY,this);
+		gameTable[fromX][fromY] = new Grass(fromX, fromY, this);
 
 	}
 
 	/* when a destroyable object explode */
 	public void explode(int x, int y) {
-		gameTable[x][y] = new Grass(x,y,this);
+		gameTable[x][y] = new Grass(x, y, this);
 
 	}
 
