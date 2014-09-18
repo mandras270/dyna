@@ -23,7 +23,7 @@ public class Player extends Ground {
 	public void setBomb() {
 		if (bombLeft > 0) {
 			new Bomb(x, y, gt, this);
-			bombLeft++;
+			bombLeft--;
 		}
 	}
 
